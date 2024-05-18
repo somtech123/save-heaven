@@ -7,39 +7,39 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:save_heaven/src/utils/utils.dart';
 
 class AppTextField extends StatelessWidget {
-  const AppTextField({
-    super.key,
-    this.fillColor,
-    this.textEditingController,
-    this.isTransparentBorder = false,
-    this.borderColor = Colors.transparent,
-    this.borderRadius,
-    this.cursorColor,
-    this.prefix,
-    this.suffix,
-    this.hasPrefixIcon = false,
-    this.hasSuffixIcon = false,
-    this.placeholder,
-    this.placeholderStyle,
-    this.scrollPadding,
-    this.inputStringStyle,
-    this.obscureText,
-    this.enabled,
-    this.filled,
-    this.readOnly,
-    this.autofocus,
-    this.isCollapsed,
-    this.showCursor,
-    this.contentpadding,
-    this.inputFormatters,
-    this.textCapitalization,
-    this.textInputAction = TextInputAction.done,
-    this.focusNode,
-    this.keyboardType,
-    this.onChanged,
-    this.onSubmitted,
-    this.onTap,
-  });
+  const AppTextField(
+      {super.key,
+      this.fillColor,
+      this.textEditingController,
+      this.isTransparentBorder = false,
+      this.borderColor = Colors.transparent,
+      this.borderRadius,
+      this.cursorColor,
+      this.prefix,
+      this.suffix,
+      this.hasPrefixIcon = false,
+      this.hasSuffixIcon = false,
+      this.placeholder,
+      this.placeholderStyle,
+      this.scrollPadding,
+      this.inputStringStyle,
+      this.obscureText,
+      this.enabled,
+      this.filled,
+      this.readOnly,
+      this.autofocus,
+      this.isCollapsed,
+      this.showCursor,
+      this.contentpadding,
+      this.inputFormatters,
+      this.textCapitalization,
+      this.textInputAction = TextInputAction.done,
+      this.focusNode,
+      this.keyboardType,
+      this.onChanged,
+      this.onSubmitted,
+      this.onTap,
+      this.error});
 
   final Color? fillColor;
   final TextEditingController? textEditingController;
@@ -65,6 +65,7 @@ class AppTextField extends StatelessWidget {
   final bool? showCursor;
   final bool? obscureText;
   final String? placeholder;
+  final String? error;
   final TextStyle? placeholderStyle;
   final TextStyle? inputStringStyle;
   final EdgeInsets? scrollPadding;
@@ -79,55 +80,77 @@ class AppTextField extends StatelessWidget {
     final h = sHeight(context);
 
     return Platform.isIOS
-        ? Container(
-            constraints: BoxConstraints(
-              maxHeight: h(50.0),
-              maxWidth: fs('width'),
-            ),
-            padding: contentpadding ?? EdgeInsets.all(5.h),
-            decoration: BoxDecoration(
-              color: fillColor ?? Appcolors.fillColor,
-              borderRadius: BorderRadius.circular(borderRadius ?? 8.0),
-            ),
-            child: CupertinoTextField(
-                controller: textEditingController,
-                prefix: prefix,
-                suffix: suffix,
-                placeholder: placeholder ?? '',
-                cursorColor: cursorColor ?? Appcolors.primaryColor,
-                placeholderStyle: placeholderStyle ??
-                    Theme.of(context).textTheme.bodyMedium!.copyWith(
-                        fontSize: 16,
-                        color: Appcolors.greyColor,
-                        fontWeight: FontWeight.w500),
-                style: inputStringStyle ??
-                    Theme.of(context)
-                        .textTheme
-                        .bodyMedium!
-                        .copyWith(fontSize: 16, fontWeight: FontWeight.w500),
-                obscureText: obscureText ?? false,
-                enabled: enabled ?? true,
-                readOnly: readOnly ?? false,
-                showCursor: showCursor ?? true,
-                autofocus: autofocus ?? false,
-                autocorrect: false,
-                textInputAction: textInputAction,
-                inputFormatters: inputFormatters ?? [],
-                textCapitalization:
-                    textCapitalization ?? TextCapitalization.sentences,
-                keyboardType: keyboardType ?? TextInputType.text,
-                focusNode: focusNode,
-                onChanged: onChanged,
-                onTap: () =>
-                    onTap ?? FocusScope.of(context).requestFocus(focusNode),
-                onSubmitted: (value) {
-                  onSubmitted ??
-                      SystemChannels.textInput.invokeMethod('TextInput.hide');
-                },
-                scrollPadding:
-                    scrollPadding ?? const EdgeInsets.only(bottom: 200),
-                decoration:
-                    BoxDecoration(color: fillColor ?? Appcolors.fillColor)))
+        ? Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                  constraints: BoxConstraints(
+                    maxHeight: h(50.0),
+                    maxWidth: fs('width'),
+                  ),
+                  padding: contentpadding ?? EdgeInsets.all(5.h),
+                  decoration: BoxDecoration(
+                    color: fillColor ?? Appcolors.fillColor,
+                    borderRadius: BorderRadius.circular(borderRadius ?? 8.0),
+                    border: Border.all(
+                      color: (error != null && error!.isNotEmpty)
+                          ? Appcolors.errorColor
+                          : Colors.transparent,
+                    ),
+                  ),
+                  child: CupertinoTextField(
+                      controller: textEditingController,
+                      prefix: prefix,
+                      suffix: suffix,
+                      placeholder: placeholder ?? '',
+                      cursorColor: cursorColor ?? Appcolors.primaryColor,
+                      placeholderStyle: placeholderStyle ??
+                          Theme.of(context).textTheme.bodyMedium!.copyWith(
+                              fontSize: 16,
+                              color: Appcolors.greyColor,
+                              fontWeight: FontWeight.w500),
+                      style: inputStringStyle ??
+                          Theme.of(context).textTheme.bodyMedium!.copyWith(
+                              fontSize: 16, fontWeight: FontWeight.w500),
+                      obscureText: obscureText ?? false,
+                      enabled: enabled ?? true,
+                      readOnly: readOnly ?? false,
+                      showCursor: showCursor ?? true,
+                      autofocus: autofocus ?? false,
+                      autocorrect: false,
+                      textInputAction: textInputAction,
+                      inputFormatters: inputFormatters ?? [],
+                      textCapitalization:
+                          textCapitalization ?? TextCapitalization.sentences,
+                      keyboardType: keyboardType ?? TextInputType.text,
+                      focusNode: focusNode,
+                      onChanged: onChanged,
+                      onTap: () =>
+                          onTap ??
+                          FocusScope.of(context).requestFocus(focusNode),
+                      onSubmitted: (value) {
+                        onSubmitted ??
+                            SystemChannels.textInput
+                                .invokeMethod('TextInput.hide');
+                      },
+                      scrollPadding:
+                          scrollPadding ?? const EdgeInsets.only(bottom: 200),
+                      decoration: BoxDecoration(
+                        color: fillColor ?? Appcolors.fillColor,
+                      ))),
+              if (error != null)
+                Padding(
+                  padding: EdgeInsets.only(left: 10.w, top: 5.h),
+                  child: Text(
+                    error ?? '',
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        fontSize: 10,
+                        fontWeight: FontWeight.w500,
+                        color: Appcolors.errorColor),
+                  ),
+                )
+            ],
+          )
         : SizedBox(
             height: h(50.0),
             width: fs('width'),
