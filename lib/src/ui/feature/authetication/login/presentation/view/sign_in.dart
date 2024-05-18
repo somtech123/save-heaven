@@ -2,13 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:save_heaven/src/ui/feature/authetication/login/presentation/view/sign_in.dart';
+import 'package:save_heaven/src/ui/feature/authetication/sign_up/presentation/view/sign_up.dart';
 import 'package:save_heaven/src/ui/shared/app_textfield.dart';
 import 'package:save_heaven/src/ui/shared/primary_button.dart';
 import 'package:save_heaven/src/utils/utils.dart';
 
-class SignupScreen extends StatelessWidget {
-  const SignupScreen({super.key});
+class SiginScreen extends StatelessWidget {
+  const SiginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,11 +23,12 @@ class SignupScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Create an Account',
+                    'Welcome Back!',
                     style: Theme.of(context)
                         .textTheme
                         .bodyMedium!
                         .copyWith(fontSize: 24, fontWeight: FontWeight.w700),
+                    textAlign: TextAlign.center,
                   ),
                   Text(
                     'Kindly fill in the required details!',
@@ -48,7 +49,7 @@ class SignupScreen extends StatelessWidget {
                     suffix: Icon(Icons.visibility),
                   ),
                   SizedBox(height: 30.h),
-                  PrimaryButton(label: 'Sign up', onPressed: () {}),
+                  PrimaryButton(label: 'Sign in', onPressed: () {}),
                   SizedBox(height: 10.h),
                   Center(
                     child: RichText(
@@ -61,10 +62,10 @@ class SignupScreen extends StatelessWidget {
                                   fontSize: 12, fontWeight: FontWeight.w400),
                           children: [
                             TextSpan(
-                                text: 'Sign In',
+                                text: 'Sign up',
                                 recognizer: TapGestureRecognizer()
-                                  ..onTap = () =>
-                                      push(context, destination: SiginScreen()),
+                                  ..onTap = () => push(context,
+                                      destination: SignupScreen()),
                                 style: Theme.of(context)
                                     .textTheme
                                     .bodySmall!

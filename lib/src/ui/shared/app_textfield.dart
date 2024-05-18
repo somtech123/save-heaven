@@ -127,8 +127,7 @@ class AppTextField extends StatelessWidget {
                 scrollPadding:
                     scrollPadding ?? const EdgeInsets.only(bottom: 200),
                 decoration:
-                    BoxDecoration(color: fillColor ?? Appcolors.fillColor)),
-          )
+                    BoxDecoration(color: fillColor ?? Appcolors.fillColor)))
         : SizedBox(
             height: h(50.0),
             width: fs('width'),
