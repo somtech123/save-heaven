@@ -26,9 +26,13 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
 
   TextEditingController passwordController = TextEditingController();
 
+  TextEditingController usernameController = TextEditingController();
+
   @override
   void dispose() {
     emailController.dispose();
+    passwordController.dispose();
+    usernameController.dispose();
     super.dispose();
   }
 
@@ -71,8 +75,18 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                   ),
                   SizedBox(height: 10.h),
                   AppTextField(
+                    placeholder: 'Username',
+                    suffix: const Icon(CupertinoIcons.person),
+                    onChanged: (username) =>
+                        ref.read(signUpProvider.notifier).setUserName(username),
+                    textEditingController: usernameController,
+                    error: ref.watch(signUpProvider).form.username.errorMessage,
+                  ),
+                  SizedBox(height: 10.h),
+                  AppTextField(
                     placeholder: 'Password',
                     obscureText: obscureText,
+                    textEditingController: passwordController,
                     suffix: IconButton(
                         onPressed: () =>
                             ref.read(signUpProvider.notifier).obscureText(),
@@ -89,9 +103,9 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                     label: 'Sign up',
                     onPressed: () => ref
                         .read(signUpProvider.notifier)
-                        .signupUser(
-                            email: emailController.text,
-                            password: passwordController.text),
+                        .signupUser(context,
+                            email: emailController.text.trim(),
+                            password: passwordController.text.trim()),
                     isDisabled: !ref.watch(signUpProvider).form.isValid,
                   ),
                   SizedBox(height: 10.h),

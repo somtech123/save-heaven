@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$UserSignUpEntity {
   AuthField get email => throw _privateConstructorUsedError;
   AuthField get password => throw _privateConstructorUsedError;
+  AuthField get username => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $UserSignUpEntityCopyWith<UserSignUpEntity> get copyWith =>
@@ -30,10 +31,11 @@ abstract class $UserSignUpEntityCopyWith<$Res> {
           UserSignUpEntity value, $Res Function(UserSignUpEntity) then) =
       _$UserSignUpEntityCopyWithImpl<$Res, UserSignUpEntity>;
   @useResult
-  $Res call({AuthField email, AuthField password});
+  $Res call({AuthField email, AuthField password, AuthField username});
 
   $AuthFieldCopyWith<$Res> get email;
   $AuthFieldCopyWith<$Res> get password;
+  $AuthFieldCopyWith<$Res> get username;
 }
 
 /// @nodoc
@@ -51,6 +53,7 @@ class _$UserSignUpEntityCopyWithImpl<$Res, $Val extends UserSignUpEntity>
   $Res call({
     Object? email = null,
     Object? password = null,
+    Object? username = null,
   }) {
     return _then(_value.copyWith(
       email: null == email
@@ -60,6 +63,10 @@ class _$UserSignUpEntityCopyWithImpl<$Res, $Val extends UserSignUpEntity>
       password: null == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
+              as AuthField,
+      username: null == username
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
               as AuthField,
     ) as $Val);
   }
@@ -79,6 +86,14 @@ class _$UserSignUpEntityCopyWithImpl<$Res, $Val extends UserSignUpEntity>
       return _then(_value.copyWith(password: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $AuthFieldCopyWith<$Res> get username {
+    return $AuthFieldCopyWith<$Res>(_value.username, (value) {
+      return _then(_value.copyWith(username: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -89,12 +104,14 @@ abstract class _$$UserSignUpEntityImplCopyWith<$Res>
       __$$UserSignUpEntityImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({AuthField email, AuthField password});
+  $Res call({AuthField email, AuthField password, AuthField username});
 
   @override
   $AuthFieldCopyWith<$Res> get email;
   @override
   $AuthFieldCopyWith<$Res> get password;
+  @override
+  $AuthFieldCopyWith<$Res> get username;
 }
 
 /// @nodoc
@@ -110,6 +127,7 @@ class __$$UserSignUpEntityImplCopyWithImpl<$Res>
   $Res call({
     Object? email = null,
     Object? password = null,
+    Object? username = null,
   }) {
     return _then(_$UserSignUpEntityImpl(
       email: null == email
@@ -120,6 +138,10 @@ class __$$UserSignUpEntityImplCopyWithImpl<$Res>
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as AuthField,
+      username: null == username
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
+              as AuthField,
     ));
   }
 }
@@ -127,17 +149,20 @@ class __$$UserSignUpEntityImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$UserSignUpEntityImpl extends _UserSignUpEntity {
-  const _$UserSignUpEntityImpl({required this.email, required this.password})
+  const _$UserSignUpEntityImpl(
+      {required this.email, required this.password, required this.username})
       : super._();
 
   @override
   final AuthField email;
   @override
   final AuthField password;
+  @override
+  final AuthField username;
 
   @override
   String toString() {
-    return 'UserSignUpEntity(email: $email, password: $password)';
+    return 'UserSignUpEntity(email: $email, password: $password, username: $username)';
   }
 
   @override
@@ -147,11 +172,13 @@ class _$UserSignUpEntityImpl extends _UserSignUpEntity {
             other is _$UserSignUpEntityImpl &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.password, password) ||
-                other.password == password));
+                other.password == password) &&
+            (identical(other.username, username) ||
+                other.username == username));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, email, password);
+  int get hashCode => Object.hash(runtimeType, email, password, username);
 
   @JsonKey(ignore: true)
   @override
@@ -164,13 +191,16 @@ class _$UserSignUpEntityImpl extends _UserSignUpEntity {
 abstract class _UserSignUpEntity extends UserSignUpEntity {
   const factory _UserSignUpEntity(
       {required final AuthField email,
-      required final AuthField password}) = _$UserSignUpEntityImpl;
+      required final AuthField password,
+      required final AuthField username}) = _$UserSignUpEntityImpl;
   const _UserSignUpEntity._() : super._();
 
   @override
   AuthField get email;
   @override
   AuthField get password;
+  @override
+  AuthField get username;
   @override
   @JsonKey(ignore: true)
   _$$UserSignUpEntityImplCopyWith<_$UserSignUpEntityImpl> get copyWith =>

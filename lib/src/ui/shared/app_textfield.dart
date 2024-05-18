@@ -121,7 +121,7 @@ class AppTextField extends StatelessWidget {
                       textInputAction: textInputAction,
                       inputFormatters: inputFormatters ?? [],
                       textCapitalization:
-                          textCapitalization ?? TextCapitalization.sentences,
+                          textCapitalization ?? TextCapitalization.none,
                       keyboardType: keyboardType ?? TextInputType.text,
                       focusNode: focusNode,
                       onChanged: onChanged,
@@ -172,8 +172,7 @@ class AppTextField extends StatelessWidget {
               autocorrect: false,
               textInputAction: textInputAction,
               inputFormatters: inputFormatters ?? [],
-              textCapitalization:
-                  textCapitalization ?? TextCapitalization.sentences,
+              textCapitalization: textCapitalization ?? TextCapitalization.none,
               keyboardType: keyboardType ?? TextInputType.text,
               focusNode: focusNode,
               onChanged: onChanged,
