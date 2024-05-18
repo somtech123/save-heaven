@@ -24,6 +24,8 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
 
   TextEditingController emailController = TextEditingController();
 
+  TextEditingController passwordController = TextEditingController();
+
   @override
   void dispose() {
     emailController.dispose();
@@ -82,7 +84,16 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                         ref.read(signUpProvider.notifier).setPassword(password),
                   ),
                   SizedBox(height: 30.h),
-                  PrimaryButton(label: 'Sign up', onPressed: () {}),
+                  PrimaryButton(
+                    isValidating: ref.watch(signUpProvider).isValidating,
+                    label: 'Sign up',
+                    onPressed: () => ref
+                        .read(signUpProvider.notifier)
+                        .signupUser(
+                            email: emailController.text,
+                            password: passwordController.text),
+                    isDisabled: !ref.watch(signUpProvider).form.isValid,
+                  ),
                   SizedBox(height: 10.h),
                   Center(
                     child: RichText(

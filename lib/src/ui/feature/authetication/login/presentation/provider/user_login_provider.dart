@@ -3,20 +3,16 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:save_heaven/src/app/extensions/email_validator.dart';
 import 'package:save_heaven/src/app/extensions/password_validator.dart';
-
 import 'package:save_heaven/src/ui/feature/authetication/authentication.dart';
 
-class UserSignUpFormProvider extends StateNotifier<UserSignUpFormState> {
-  UserSignUpFormProvider()
-      : super(UserSignUpFormState(
-            form: UserSignUpEntity.empty(), obscureText: true));
+class LoginProvider extends StateNotifier<UserLoginFormState> {
+  LoginProvider() : super(UserLoginFormState(form: UserLoginEntity.empty()));
 
   void setEmail(String email) {
     final isEmail = email.isValidEmail();
 
 //copy from the state and add email
-    UserSignUpEntity _form =
-        state.form.copyWith(email: AuthField(value: email));
+    UserLoginEntity _form = state.form.copyWith(email: AuthField(value: email));
 
     late AuthField emailFeild;
 
@@ -33,7 +29,7 @@ class UserSignUpFormProvider extends StateNotifier<UserSignUpFormState> {
   void setPassword(String password) {
     final isPasword = password.isValidPassword();
 
-    UserSignUpEntity _form =
+    UserLoginEntity _form =
         state.form.copyWith(password: AuthField(value: password));
 
     late AuthField passwordFeild;
@@ -50,13 +46,5 @@ class UserSignUpFormProvider extends StateNotifier<UserSignUpFormState> {
 
   void obscureText() {
     state = state.copyWith(obscureText: !state.obscureText);
-  }
-
-  signupUser({required String email, required String password}) {
-    if (state.form.isValid) {
-      state = state.copyWith(isValidating: true);
-    } else {
-      state = state.copyWith(isValidating: false);
-    }
   }
 }

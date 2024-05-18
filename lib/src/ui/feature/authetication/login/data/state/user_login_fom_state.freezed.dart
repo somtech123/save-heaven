@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'user_sign_up_form_state.dart';
+part of 'user_login_fom_state.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,31 +15,31 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$UserSignUpFormState {
-  UserSignUpEntity get form => throw _privateConstructorUsedError;
+mixin _$UserLoginFormState {
+  UserLoginEntity get form => throw _privateConstructorUsedError;
   bool get obscureText => throw _privateConstructorUsedError;
   bool get isValidating => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $UserSignUpFormStateCopyWith<UserSignUpFormState> get copyWith =>
+  $UserLoginFormStateCopyWith<UserLoginFormState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $UserSignUpFormStateCopyWith<$Res> {
-  factory $UserSignUpFormStateCopyWith(
-          UserSignUpFormState value, $Res Function(UserSignUpFormState) then) =
-      _$UserSignUpFormStateCopyWithImpl<$Res, UserSignUpFormState>;
+abstract class $UserLoginFormStateCopyWith<$Res> {
+  factory $UserLoginFormStateCopyWith(
+          UserLoginFormState value, $Res Function(UserLoginFormState) then) =
+      _$UserLoginFormStateCopyWithImpl<$Res, UserLoginFormState>;
   @useResult
-  $Res call({UserSignUpEntity form, bool obscureText, bool isValidating});
+  $Res call({UserLoginEntity form, bool obscureText, bool isValidating});
 
-  $UserSignUpEntityCopyWith<$Res> get form;
+  $UserLoginEntityCopyWith<$Res> get form;
 }
 
 /// @nodoc
-class _$UserSignUpFormStateCopyWithImpl<$Res, $Val extends UserSignUpFormState>
-    implements $UserSignUpFormStateCopyWith<$Res> {
-  _$UserSignUpFormStateCopyWithImpl(this._value, this._then);
+class _$UserLoginFormStateCopyWithImpl<$Res, $Val extends UserLoginFormState>
+    implements $UserLoginFormStateCopyWith<$Res> {
+  _$UserLoginFormStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -57,7 +57,7 @@ class _$UserSignUpFormStateCopyWithImpl<$Res, $Val extends UserSignUpFormState>
       form: null == form
           ? _value.form
           : form // ignore: cast_nullable_to_non_nullable
-              as UserSignUpEntity,
+              as UserLoginEntity,
       obscureText: null == obscureText
           ? _value.obscureText
           : obscureText // ignore: cast_nullable_to_non_nullable
@@ -71,33 +71,33 @@ class _$UserSignUpFormStateCopyWithImpl<$Res, $Val extends UserSignUpFormState>
 
   @override
   @pragma('vm:prefer-inline')
-  $UserSignUpEntityCopyWith<$Res> get form {
-    return $UserSignUpEntityCopyWith<$Res>(_value.form, (value) {
+  $UserLoginEntityCopyWith<$Res> get form {
+    return $UserLoginEntityCopyWith<$Res>(_value.form, (value) {
       return _then(_value.copyWith(form: value) as $Val);
     });
   }
 }
 
 /// @nodoc
-abstract class _$$UserSignUpFormStateImplCopyWith<$Res>
-    implements $UserSignUpFormStateCopyWith<$Res> {
-  factory _$$UserSignUpFormStateImplCopyWith(_$UserSignUpFormStateImpl value,
-          $Res Function(_$UserSignUpFormStateImpl) then) =
-      __$$UserSignUpFormStateImplCopyWithImpl<$Res>;
+abstract class _$$$UserLoginFormStateImplCopyWith<$Res>
+    implements $UserLoginFormStateCopyWith<$Res> {
+  factory _$$$UserLoginFormStateImplCopyWith(_$$UserLoginFormStateImpl value,
+          $Res Function(_$$UserLoginFormStateImpl) then) =
+      __$$$UserLoginFormStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({UserSignUpEntity form, bool obscureText, bool isValidating});
+  $Res call({UserLoginEntity form, bool obscureText, bool isValidating});
 
   @override
-  $UserSignUpEntityCopyWith<$Res> get form;
+  $UserLoginEntityCopyWith<$Res> get form;
 }
 
 /// @nodoc
-class __$$UserSignUpFormStateImplCopyWithImpl<$Res>
-    extends _$UserSignUpFormStateCopyWithImpl<$Res, _$UserSignUpFormStateImpl>
-    implements _$$UserSignUpFormStateImplCopyWith<$Res> {
-  __$$UserSignUpFormStateImplCopyWithImpl(_$UserSignUpFormStateImpl _value,
-      $Res Function(_$UserSignUpFormStateImpl) _then)
+class __$$$UserLoginFormStateImplCopyWithImpl<$Res>
+    extends _$UserLoginFormStateCopyWithImpl<$Res, _$$UserLoginFormStateImpl>
+    implements _$$$UserLoginFormStateImplCopyWith<$Res> {
+  __$$$UserLoginFormStateImplCopyWithImpl(_$$UserLoginFormStateImpl _value,
+      $Res Function(_$$UserLoginFormStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -107,11 +107,11 @@ class __$$UserSignUpFormStateImplCopyWithImpl<$Res>
     Object? obscureText = null,
     Object? isValidating = null,
   }) {
-    return _then(_$UserSignUpFormStateImpl(
+    return _then(_$$UserLoginFormStateImpl(
       form: null == form
           ? _value.form
           : form // ignore: cast_nullable_to_non_nullable
-              as UserSignUpEntity,
+              as UserLoginEntity,
       obscureText: null == obscureText
           ? _value.obscureText
           : obscureText // ignore: cast_nullable_to_non_nullable
@@ -126,12 +126,12 @@ class __$$UserSignUpFormStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$UserSignUpFormStateImpl implements _UserSignUpFormState {
-  const _$UserSignUpFormStateImpl(
+class _$$UserLoginFormStateImpl implements $UserLoginFormState {
+  const _$$UserLoginFormStateImpl(
       {required this.form, this.obscureText = true, this.isValidating = false});
 
   @override
-  final UserSignUpEntity form;
+  final UserLoginEntity form;
   @override
   @JsonKey()
   final bool obscureText;
@@ -141,14 +141,14 @@ class _$UserSignUpFormStateImpl implements _UserSignUpFormState {
 
   @override
   String toString() {
-    return 'UserSignUpFormState(form: $form, obscureText: $obscureText, isValidating: $isValidating)';
+    return 'UserLoginFormState(form: $form, obscureText: $obscureText, isValidating: $isValidating)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$UserSignUpFormStateImpl &&
+            other is _$$UserLoginFormStateImpl &&
             (identical(other.form, form) || other.form == form) &&
             (identical(other.obscureText, obscureText) ||
                 other.obscureText == obscureText) &&
@@ -162,25 +162,25 @@ class _$UserSignUpFormStateImpl implements _UserSignUpFormState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$UserSignUpFormStateImplCopyWith<_$UserSignUpFormStateImpl> get copyWith =>
-      __$$UserSignUpFormStateImplCopyWithImpl<_$UserSignUpFormStateImpl>(
+  _$$$UserLoginFormStateImplCopyWith<_$$UserLoginFormStateImpl> get copyWith =>
+      __$$$UserLoginFormStateImplCopyWithImpl<_$$UserLoginFormStateImpl>(
           this, _$identity);
 }
 
-abstract class _UserSignUpFormState implements UserSignUpFormState {
-  const factory _UserSignUpFormState(
-      {required final UserSignUpEntity form,
+abstract class $UserLoginFormState implements UserLoginFormState {
+  const factory $UserLoginFormState(
+      {required final UserLoginEntity form,
       final bool obscureText,
-      final bool isValidating}) = _$UserSignUpFormStateImpl;
+      final bool isValidating}) = _$$UserLoginFormStateImpl;
 
   @override
-  UserSignUpEntity get form;
+  UserLoginEntity get form;
   @override
   bool get obscureText;
   @override
   bool get isValidating;
   @override
   @JsonKey(ignore: true)
-  _$$UserSignUpFormStateImplCopyWith<_$UserSignUpFormStateImpl> get copyWith =>
+  _$$$UserLoginFormStateImplCopyWith<_$$UserLoginFormStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
