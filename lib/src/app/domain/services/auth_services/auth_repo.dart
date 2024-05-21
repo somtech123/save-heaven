@@ -8,4 +8,6 @@ abstract class AuthRepo {
   Future<void> checkAuthState();
 
   Future<void> logOut(BuildContext context);
+
+  Future<AuthResponse> login({required SingUpResources pram});
 }

@@ -25,6 +25,9 @@ class Dashboard extends ConsumerWidget {
       navigationBar: CupertinoNavigationBar(
           middle: const Text('Home'),
           backgroundColor: Appcolors.whiteColor,
+          leading: IconButton(
+              onPressed: () async => SuperbaseClient.instance.uploadFile(),
+              icon: Icon(CupertinoIcons.add, size: 23.w)),
           trailing: PullDownButton(
             itemBuilder: (context) => [
               PullDownMenuHeader(
@@ -142,37 +145,42 @@ class Dashboard extends ConsumerWidget {
               child: const Icon(CupertinoIcons.ellipsis_circle),
             ),
           )),
-      child: SafeArea(
-          child: Column(
-        children: [
-          Expanded(
-              child: !changeView
-                  ? GridView.builder(
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 3,
-                          crossAxisSpacing: 5.w,
-                          mainAxisSpacing: 2.w),
-                      itemBuilder: (context, index) => Padding(
-                        padding: EdgeInsets.all(10),
-                        child: Container(
-                          height: 20,
-                          color: Colors.red,
+      child: WillPopScope(
+        onWillPop: () async {
+          return true;
+        },
+        child: SafeArea(
+            child: Column(
+          children: [
+            Expanded(
+                child: !changeView
+                    ? GridView.builder(
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 3,
+                            crossAxisSpacing: 5.w,
+                            mainAxisSpacing: 2.w),
+                        itemBuilder: (context, index) => Padding(
+                          padding: EdgeInsets.all(10),
+                          child: Container(
+                            height: 20,
+                            color: Colors.red,
+                          ),
                         ),
-                      ),
-                    )
-                  : ListView.builder(
-                      itemBuilder: (context, index) => Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                          height: 20.h,
-                          color: Colors.red,
+                      )
+                    : ListView.builder(
+                        itemBuilder: (context, index) => Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            height: 20.h,
+                            color: Colors.red,
+                          ),
                         ),
-                      ),
-                      itemCount: 20,
-                    ))
-          // DashbaordListItem(),
-        ],
-      )),
+                        itemCount: 20,
+                      ))
+            // DashbaordListItem(),
+          ],
+        )),
+      ),
     );
   }
 }

@@ -30,4 +30,10 @@ class AuthRepoImplementation extends AuthRepo {
     await _client.auth.signOut().then(
         (value) => pushReplacement(context, destination: const SiginScreen()));
   }
+
+  @override
+  Future<AuthResponse> login({required SingUpResources pram}) async {
+    return await _client.auth
+        .signInWithPassword(password: pram.password, email: pram.email);
+  }
 }

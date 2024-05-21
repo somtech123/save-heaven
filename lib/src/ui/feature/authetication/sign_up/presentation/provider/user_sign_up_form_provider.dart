@@ -76,14 +76,16 @@ class UserSignUpFormProvider extends StateNotifier<UserSignUpFormState> {
   }
 
   signupUser(BuildContext context,
-      {required String email, required String password}) async {
+      {required String email,
+      required String password,
+      required String username}) async {
     if (state.form.isValid) {
       state = state.copyWith(isValidating: true);
 
       try {
         await SuperbaseClient.instance.signup(
             pram: SingUpResources(
-                email: email, password: password, username: ''));
+                email: email, password: password, username: username));
 
         showToastMessage('Registration Success', isError: false);
 

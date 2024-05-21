@@ -101,11 +101,13 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                   PrimaryButton(
                     isValidating: ref.watch(signUpProvider).isValidating,
                     label: 'Sign up',
-                    onPressed: () => ref
-                        .read(signUpProvider.notifier)
-                        .signupUser(context,
-                            email: emailController.text.trim(),
-                            password: passwordController.text.trim()),
+                    onPressed: () =>
+                        ref.read(signUpProvider.notifier).signupUser(
+                              context,
+                              email: emailController.text.trim(),
+                              password: passwordController.text.trim(),
+                              username: usernameController.text.trim(),
+                            ),
                     isDisabled: !ref.watch(signUpProvider).form.isValid,
                   ),
                   SizedBox(height: 10.h),
@@ -122,8 +124,8 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                             TextSpan(
                                 text: 'Sign In',
                                 recognizer: TapGestureRecognizer()
-                                  ..onTap = () =>
-                                      push(context, destination: SiginScreen()),
+                                  ..onTap = () => push(context,
+                                      destination: const SiginScreen()),
                                 style: Theme.of(context)
                                     .textTheme
                                     .bodySmall!
