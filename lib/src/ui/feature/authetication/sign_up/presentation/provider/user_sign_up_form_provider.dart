@@ -87,7 +87,7 @@ class UserSignUpFormProvider extends StateNotifier<UserSignUpFormState> {
 
         showToastMessage('Registration Success', isError: false);
 
-        await pushReplacement(context, destination: const Dashboard());
+        await pushReplacement(context, destination: Dashboard());
 
         state = state.copyWith(isValidating: false);
       } on AuthException catch (e) {

@@ -1,5 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:save_heaven/src/app/domain/resource/signup_resource.dart';
 import 'package:save_heaven/src/app/domain/services/auth_services/auth_repo.dart';
+import 'package:save_heaven/src/ui/feature/authetication/login/presentation/view/sign_in.dart';
+import 'package:save_heaven/src/utils/utils.dart';
 
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -20,5 +23,11 @@ class AuthRepoImplementation extends AuthRepo {
   @override
   Future<void> checkAuthState() async {
     //if (_client.auth.currentUser != null) {}
+  }
+
+  @override
+  Future<void> logOut(BuildContext context) async {
+    await _client.auth.signOut().then(
+        (value) => pushReplacement(context, destination: const SiginScreen()));
   }
 }

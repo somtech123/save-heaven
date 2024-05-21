@@ -29,7 +29,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
         if (event != AuthChangeEvent.signedOut ||
             event == AuthChangeEvent.initialSession) {
           if (_client.currentUser != null && _client.currentSession != null) {
-            pushReplacement(context, destination: const Dashboard());
+            pushReplacement(context, destination: Dashboard());
           } else {
             pushReplacement(context, destination: const SiginScreen());
           }
