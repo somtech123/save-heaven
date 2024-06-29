@@ -1,16 +1,18 @@
 // ignore_for_file: no_leading_underscores_for_local_identifiers, use_build_context_synchronously
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:save_heaven/src/app/domain/manager/superbase_manager/superbase.dart';
+import 'package:save_heaven/src/app/domain/manager/auth_manager/auth_client.dart';
 import 'package:save_heaven/src/app/domain/resource/signup_resource.dart';
+
 import 'package:save_heaven/src/app/extensions/email_validator.dart';
 import 'package:save_heaven/src/app/extensions/password_validator.dart';
 import 'package:save_heaven/src/ui/feature/authetication/authentication.dart';
 import 'package:save_heaven/src/ui/feature/dashboard/presentation/view/dashboard.dart';
 import 'package:save_heaven/src/ui/shared/toast.dart';
+
 import 'package:save_heaven/src/utils/utils.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 class LoginProvider extends StateNotifier<UserLoginFormState> {
   LoginProvider()
@@ -66,19 +68,33 @@ class LoginProvider extends StateNotifier<UserLoginFormState> {
       state = state.copyWith(isValidating: true);
 
       try {
-        await SuperbaseClient.instance.login(
+        UserCredential cred = await AuthClient.instance.login(
             pram: SingUpResources(
                 email: email, password: password, username: ''));
 
-        showToastMessage('Registration Success', isError: false);
+        // ignore: unnecessary_null_comparison
+        if (cred != null) {
+          showToastMessage('Login Success', isError: false);
 
-        pushReplacement(context, destination: Dashboard());
+          pushReplacement(context, destination: Dashboard());
 
+          state = state.copyWith(isValidating: false);
+        } else {
+          showToastMessage('An Error Occured', isError: true);
+        }
+      } on FirebaseAuthException catch (e) {
         state = state.copyWith(isValidating: false);
-      } on AuthException catch (e) {
-        state = state.copyWith(isValidating: false);
 
-        showToastMessage(e.message, isError: true);
+        if (e.code == 'user-not-found') {
+          showToastMessage('No user found for that email.', isError: true);
+        } else if (e.code == 'wrong-password') {
+          showToastMessage('Wrong password provided for that user.',
+              isError: true);
+        } else {
+          showToastMessage(e.message.toString(), isError: true);
+        }
+      } catch (e) {
+        showToastMessage(e.toString(), isError: true);
       }
     } else {
       state = state.copyWith(isValidating: false);

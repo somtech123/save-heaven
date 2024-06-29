@@ -4,10 +4,10 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:save_heaven/src/app/domain/services/user_services/user_repo.dart';
 import 'package:save_heaven/src/ui/shared/toast.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
+//mport 'package:supabase_flutter/supabase_flutter.dart';
 
 class UserRepoImplementation extends UserRepository {
-  final _client = Supabase.instance.client;
+  //final _client = Supabase.instance.client;
 
   @override
   uploadFile() async {
@@ -32,11 +32,11 @@ class UserRepoImplementation extends UserRepository {
 
       debugPrint(bytes.toString());
 
-      final userId = _client.auth.currentUser!.id;
+      //  final userId = _client.auth.currentUser!.id;
 
-      await _client.storage.from('user').uploadBinary('/$userId', bytes!,
-          fileOptions:
-              FileOptions(upsert: true, contentType: 'file/$_fileExtension'));
+      // await _client.storage.from('user').uploadBinary('/$userId', bytes!,
+      //     fileOptions:
+      //         FileOptions(upsert: true, contentType: 'file/$_fileExtension'));
 
       showToastMessage('Successfuly uploaded file', isError: false);
     }

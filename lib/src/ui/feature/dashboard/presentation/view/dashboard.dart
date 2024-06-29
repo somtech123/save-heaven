@@ -1,10 +1,11 @@
-// ignore_for_file: deprecated_member_use, depend_on_referenced_packages
+// ignore_for_file: deprecated_member_use, depend_on_referenced_packages, use_build_context_synchronously
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:save_heaven/src/app/domain/manager/superbase_manager/superbase.dart';
+import 'package:save_heaven/src/app/domain/manager/auth_manager/auth_client.dart';
+import 'package:save_heaven/src/ui/feature/authetication/login/presentation/view/sign_in.dart';
 import 'package:save_heaven/src/ui/feature/dashboard/dashboard.dart';
 import 'package:save_heaven/src/ui/shared/dialog/app_dialog.dart';
 import 'package:save_heaven/src/ui/shared/primary_button.dart';
@@ -26,7 +27,8 @@ class Dashboard extends ConsumerWidget {
           middle: const Text('Home'),
           backgroundColor: Appcolors.whiteColor,
           leading: IconButton(
-              onPressed: () async => SuperbaseClient.instance.uploadFile(),
+              onPressed: () {},
+              //async => SuperbaseClient.instance.uploadFile(),
               icon: Icon(CupertinoIcons.add, size: 23.w)),
           trailing: PullDownButton(
             itemBuilder: (context) => [
@@ -105,8 +107,11 @@ class Dashboard extends ConsumerWidget {
                             width: 95.w,
                             child: PrimaryButton(
                               label: 'Okay',
-                              onPressed: () async =>
-                                  SuperbaseClient.instance.logout(context),
+                              onPressed: () async {
+                                await AuthClient.instance.logOut();
+                                pushReplacement(context,
+                                    destination: const SiginScreen());
+                              },
                               backgroundColor: Appcolors.errorColor,
                             ),
                           ),

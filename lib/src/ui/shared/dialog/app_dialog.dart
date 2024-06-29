@@ -19,6 +19,8 @@ _diaglogWrapper(BuildContext context,
       : showDialog(
           context: context,
           builder: (context) => AlertDialog(
+                backgroundColor: Appcolors.scaffoldbg,
+                surfaceTintColor: Appcolors.scaffoldbg,
                 title: title,
                 content: content,
               ));
@@ -56,3 +58,21 @@ simpleDialog(BuildContext context,
             ],
           ),
     );
+
+buildAlertDialog(BuildContext context,
+        {required Widget content,
+        Widget? title,
+        List<Widget>? actions,
+        bool barrierDismissible = false}) =>
+    showDialog(
+        context: context,
+        barrierDismissible: barrierDismissible,
+        builder: (context) {
+          return AlertDialog(
+            backgroundColor: Appcolors.scaffoldbg,
+            surfaceTintColor: Appcolors.scaffoldbg,
+            content: content,
+            title: title,
+            actions: actions,
+          );
+        });

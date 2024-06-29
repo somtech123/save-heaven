@@ -1,13 +1,16 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:async';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:save_heaven/src/app/domain/manager/auth_manager/auth_client.dart';
 import 'package:save_heaven/src/ui/feature/authetication/login/presentation/view/sign_in.dart';
 import 'package:save_heaven/src/ui/feature/dashboard/presentation/view/dashboard.dart';
 import 'package:save_heaven/src/utils/utils.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 class SplashScreen extends ConsumerStatefulWidget {
   const SplashScreen({super.key});
@@ -17,33 +20,18 @@ class SplashScreen extends ConsumerStatefulWidget {
 }
 
 class _SplashScreenState extends ConsumerState<SplashScreen> {
-  final _client = Supabase.instance.client.auth;
-
-  late StreamSubscription<AuthState> _streamSubscription;
+  final _client = AuthClient.instance;
 
   void _listenForAuthChanges() async {
-    Future.delayed(const Duration(milliseconds: 2000)).then((value) {
-      _streamSubscription = _client.onAuthStateChange.listen((data) {
-        final event = data.event;
+    Future.delayed(const Duration(milliseconds: 2000)).then((value) async {
+      User? currentUser = await _client.checkAuthState();
 
-        if (event != AuthChangeEvent.signedOut ||
-            event == AuthChangeEvent.initialSession) {
-          if (_client.currentUser != null && _client.currentSession != null) {
-            pushReplacement(context, destination: Dashboard());
-          } else {
-            pushReplacement(context, destination: const SiginScreen());
-          }
-        } else {
-          pushReplacement(context, destination: const SiginScreen());
-        }
-      });
+      if (currentUser != null) {
+        pushReplacement(context, destination: Dashboard());
+      } else {
+        pushReplacement(context, destination: const SiginScreen());
+      }
     });
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _streamSubscription.cancel();
   }
 
   @override

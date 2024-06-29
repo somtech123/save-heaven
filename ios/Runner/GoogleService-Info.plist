@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyASemJ22M18CQWvkJ4IvOgu0BxVNVV0-yw</string>
+	<key>GCM_SENDER_ID</key>
+	<string>841087191717</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.saveHeaven</string>
+	<key>PROJECT_ID</key>
+	<string>safe-heaven-c3355</string>
+	<key>STORAGE_BUCKET</key>
+	<string>safe-heaven-c3355.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:841087191717:ios:9ee00e1b8b8278ab5e1b4c</string>
+</dict>
+</plist>

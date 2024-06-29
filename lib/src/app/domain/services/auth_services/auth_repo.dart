@@ -1,13 +1,13 @@
-import 'package:flutter/cupertino.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:save_heaven/src/app/domain/resource/signup_resource.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 abstract class AuthRepo {
-  Future<AuthResponse> signup({required SingUpResources pram});
+  Future<UserCredential> signup({required SingUpResources pram});
 
-  Future<void> checkAuthState();
+  Future<User?> checkAuthState();
 
-  Future<void> logOut(BuildContext context);
+  Future<void> logOut();
 
-  Future<AuthResponse> login({required SingUpResources pram});
+  Future<UserCredential> login({required SingUpResources pram});
 }

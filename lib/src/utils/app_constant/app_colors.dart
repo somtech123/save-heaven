@@ -15,4 +15,6 @@ class Appcolors {
   static const Color errorColor = Colors.red;
 
   static const Color successColor = Colors.green;
+
+  static const Color scaffoldbg = Colors.white;
 }

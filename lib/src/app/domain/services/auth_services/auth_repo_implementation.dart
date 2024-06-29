@@ -1,39 +1,33 @@
-import 'package:flutter/cupertino.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:save_heaven/src/app/domain/resource/signup_resource.dart';
 import 'package:save_heaven/src/app/domain/services/auth_services/auth_repo.dart';
-import 'package:save_heaven/src/ui/feature/authetication/login/presentation/view/sign_in.dart';
-import 'package:save_heaven/src/utils/utils.dart';
-
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 class AuthRepoImplementation extends AuthRepo {
-  final _client = Supabase.instance.client;
+  final FirebaseAuth _client = FirebaseAuth.instance;
 
   @override
-  Future<AuthResponse> signup({required SingUpResources pram}) async {
-    AuthResponse result = await _client.auth.signUp(
-      password: pram.password,
-      email: pram.email,
-      data: {'username': pram.username},
-    );
+  Future<UserCredential> signup({required SingUpResources pram}) async {
+    UserCredential cred = await _client.createUserWithEmailAndPassword(
+        email: pram.email, password: pram.password);
 
-    return result;
+    return cred;
   }
 
   @override
-  Future<void> checkAuthState() async {
-    //if (_client.auth.currentUser != null) {}
+  Future<UserCredential> login({required SingUpResources pram}) async {
+    UserCredential credential = await _client.signInWithEmailAndPassword(
+        email: pram.email, password: pram.password);
+    return credential;
   }
 
   @override
-  Future<void> logOut(BuildContext context) async {
-    await _client.auth.signOut().then(
-        (value) => pushReplacement(context, destination: const SiginScreen()));
+  Future<User?> checkAuthState() async {
+    return _client.currentUser;
   }
 
   @override
-  Future<AuthResponse> login({required SingUpResources pram}) async {
-    return await _client.auth
-        .signInWithPassword(password: pram.password, email: pram.email);
+  Future<void> logOut() async {
+    await _client.signOut();
   }
 }
