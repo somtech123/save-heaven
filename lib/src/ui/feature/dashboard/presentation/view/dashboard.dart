@@ -5,20 +5,38 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:save_heaven/src/app/domain/manager/auth_manager/auth_client.dart';
+import 'package:save_heaven/src/app/helper/local_state.dart';
 import 'package:save_heaven/src/ui/feature/authetication/login/presentation/view/sign_in.dart';
 import 'package:save_heaven/src/ui/feature/dashboard/dashboard.dart';
+import 'package:save_heaven/src/ui/feature/dashboard/presentation/view/widget/grid_item.dart';
+import 'package:save_heaven/src/ui/feature/dashboard/presentation/view/widget/list_item.dart';
 import 'package:save_heaven/src/ui/shared/dialog/app_dialog.dart';
 import 'package:save_heaven/src/ui/shared/primary_button.dart';
 import 'package:save_heaven/src/utils/utils.dart';
 import 'package:pull_down_button/pull_down_button.dart';
 
-class Dashboard extends ConsumerWidget {
-  Dashboard({super.key});
+class Dashboard extends ConsumerStatefulWidget {
+  const Dashboard({super.key});
+
+  @override
+  ConsumerState<ConsumerStatefulWidget> createState() => _DashboardState();
+}
+
+class _DashboardState extends ConsumerState<Dashboard> {
   final dashProvider = StateNotifierProvider<DashboardProvider, DashboardState>(
       (ref) => DashboardProvider());
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.watch(dashProvider.notifier).getUserFile();
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final bool changeView = ref.watch(dashProvider).isGrid;
 
     return CupertinoPageScaffold(
@@ -27,8 +45,8 @@ class Dashboard extends ConsumerWidget {
           middle: const Text('Home'),
           backgroundColor: Appcolors.whiteColor,
           leading: IconButton(
-              onPressed: () {},
-              //async => SuperbaseClient.instance.uploadFile(),
+              onPressed: () async =>
+                  ref.read(dashProvider.notifier).uploadFile(context),
               icon: Icon(CupertinoIcons.add, size: 23.w)),
           trailing: PullDownButton(
             itemBuilder: (context) => [
@@ -150,42 +168,43 @@ class Dashboard extends ConsumerWidget {
               child: const Icon(CupertinoIcons.ellipsis_circle),
             ),
           )),
-      child: WillPopScope(
-        onWillPop: () async {
-          return true;
-        },
-        child: SafeArea(
-            child: Column(
-          children: [
-            Expanded(
-                child: !changeView
-                    ? GridView.builder(
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 3,
-                            crossAxisSpacing: 5.w,
-                            mainAxisSpacing: 2.w),
-                        itemBuilder: (context, index) => Padding(
-                          padding: EdgeInsets.all(10),
-                          child: Container(
-                            height: 20,
-                            color: Colors.red,
+      child: ref.watch(dashProvider).loadingState == LoadingState.loading
+          ? const Center(
+              child: CupertinoActivityIndicator(),
+            )
+          : WillPopScope(
+              onWillPop: () async {
+                return true;
+              },
+              child: SafeArea(
+                  child: Column(
+                children: [
+                  ref.watch(dashProvider).userFile.isEmpty
+                      ? SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.8,
+                          child: Center(
+                            child: Text(
+                              'you have no file yet ',
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodySmall!
+                                  .copyWith(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w500),
+                            ),
                           ),
-                        ),
-                      )
-                    : ListView.builder(
-                        itemBuilder: (context, index) => Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            height: 20.h,
-                            color: Colors.red,
-                          ),
-                        ),
-                        itemCount: 20,
-                      ))
-            // DashbaordListItem(),
-          ],
-        )),
-      ),
+                        )
+                      : Expanded(
+                          child: !changeView
+                              ? DashbordGridItem(
+                                  data: ref.read(dashProvider).userFile)
+                              : DashbaordListItem(
+                                  data: ref.read(dashProvider).userFile))
+                  //
+                ],
+              )),
+            ),
     );
   }
 }

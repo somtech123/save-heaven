@@ -26,6 +26,22 @@ _diaglogWrapper(BuildContext context,
               ));
 }
 
+buildLoadingAlert(BuildContext context) => showDialog(
+    context: context,
+    barrierDismissible: false,
+    builder: (context) {
+      return AlertDialog(
+        backgroundColor: Appcolors.scaffoldbg,
+        surfaceTintColor: Appcolors.scaffoldbg,
+        content: Container(
+          height: 100.h,
+          decoration: const BoxDecoration(
+              image:
+                  DecorationImage(image: AssetImage('assets/gif/loader.gif'))),
+        ),
+      );
+    });
+
 simpleDialog(BuildContext context,
         {required Widget title,
         Widget? content,

@@ -1,44 +1,28 @@
 // ignore_for_file: no_leading_underscores_for_local_identifiers
 
-import 'package:file_picker/file_picker.dart';
-import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:save_heaven/src/app/domain/services/user_services/user_repo.dart';
-import 'package:save_heaven/src/ui/shared/toast.dart';
-//mport 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:save_heaven/src/ui/feature/dashboard/data/model/user_file_model.dart';
 
 class UserRepoImplementation extends UserRepository {
-  //final _client = Supabase.instance.client;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   @override
-  uploadFile() async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles(
-      type: FileType.custom,
-      allowedExtensions: ['jpg', 'pdf', 'doc'],
-      withData: true,
-    );
-    if (result == null) {
-      showToastMessage('An Error occured uploading file', isError: true);
+  Future<List<UserFileModel>> getUserFiles() async {
+    final snapShot = await _firestore
+        .collection("users")
+        .doc(_auth.currentUser!.uid)
+        .collection('files')
+        //.doc(_auth.currentUser!.uid)
+        .get();
 
-      return;
-    } else {
-      // try{} on
-      PlatformFile _file = result.files[0];
+    final data = snapShot.docs.map((DocumentSnapshot<Map<String, dynamic>> e) {
+      return UserFileModel.fromJson(e.data()!['file']);
+    }).toList();
 
-      debugPrint(_file.name);
-
-      final _fileExtension = _file.extension!.split('.').last.toLowerCase();
-
-      final bytes = _file.bytes;
-
-      debugPrint(bytes.toString());
-
-      //  final userId = _client.auth.currentUser!.id;
-
-      // await _client.storage.from('user').uploadBinary('/$userId', bytes!,
-      //     fileOptions:
-      //         FileOptions(upsert: true, contentType: 'file/$_fileExtension'));
-
-      showToastMessage('Successfuly uploaded file', isError: false);
-    }
+    return data;
   }
 }

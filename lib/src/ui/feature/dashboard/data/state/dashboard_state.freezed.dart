@@ -17,6 +17,8 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$DashboardState {
   DashboardEntity get entity => throw _privateConstructorUsedError;
+  List<UserFileModel> get userFile => throw _privateConstructorUsedError;
+  LoadingState get loadingState => throw _privateConstructorUsedError;
   bool get isGrid => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -30,7 +32,11 @@ abstract class $DashboardStateCopyWith<$Res> {
           DashboardState value, $Res Function(DashboardState) then) =
       _$DashboardStateCopyWithImpl<$Res, DashboardState>;
   @useResult
-  $Res call({DashboardEntity entity, bool isGrid});
+  $Res call(
+      {DashboardEntity entity,
+      List<UserFileModel> userFile,
+      LoadingState loadingState,
+      bool isGrid});
 
   $DashboardEntityCopyWith<$Res> get entity;
 }
@@ -49,6 +55,8 @@ class _$DashboardStateCopyWithImpl<$Res, $Val extends DashboardState>
   @override
   $Res call({
     Object? entity = null,
+    Object? userFile = null,
+    Object? loadingState = null,
     Object? isGrid = null,
   }) {
     return _then(_value.copyWith(
@@ -56,6 +64,14 @@ class _$DashboardStateCopyWithImpl<$Res, $Val extends DashboardState>
           ? _value.entity
           : entity // ignore: cast_nullable_to_non_nullable
               as DashboardEntity,
+      userFile: null == userFile
+          ? _value.userFile
+          : userFile // ignore: cast_nullable_to_non_nullable
+              as List<UserFileModel>,
+      loadingState: null == loadingState
+          ? _value.loadingState
+          : loadingState // ignore: cast_nullable_to_non_nullable
+              as LoadingState,
       isGrid: null == isGrid
           ? _value.isGrid
           : isGrid // ignore: cast_nullable_to_non_nullable
@@ -80,7 +96,11 @@ abstract class _$$$DashboardStateImplCopyWith<$Res>
       __$$$DashboardStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({DashboardEntity entity, bool isGrid});
+  $Res call(
+      {DashboardEntity entity,
+      List<UserFileModel> userFile,
+      LoadingState loadingState,
+      bool isGrid});
 
   @override
   $DashboardEntityCopyWith<$Res> get entity;
@@ -98,6 +118,8 @@ class __$$$DashboardStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? entity = null,
+    Object? userFile = null,
+    Object? loadingState = null,
     Object? isGrid = null,
   }) {
     return _then(_$$DashboardStateImpl(
@@ -105,6 +127,14 @@ class __$$$DashboardStateImplCopyWithImpl<$Res>
           ? _value.entity
           : entity // ignore: cast_nullable_to_non_nullable
               as DashboardEntity,
+      userFile: null == userFile
+          ? _value._userFile
+          : userFile // ignore: cast_nullable_to_non_nullable
+              as List<UserFileModel>,
+      loadingState: null == loadingState
+          ? _value.loadingState
+          : loadingState // ignore: cast_nullable_to_non_nullable
+              as LoadingState,
       isGrid: null == isGrid
           ? _value.isGrid
           : isGrid // ignore: cast_nullable_to_non_nullable
@@ -116,17 +146,33 @@ class __$$$DashboardStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$$DashboardStateImpl implements $DashboardState {
-  const _$$DashboardStateImpl({required this.entity, this.isGrid = false});
+  const _$$DashboardStateImpl(
+      {required this.entity,
+      required final List<UserFileModel> userFile,
+      this.loadingState = LoadingState.initial,
+      this.isGrid = false})
+      : _userFile = userFile;
 
   @override
   final DashboardEntity entity;
+  final List<UserFileModel> _userFile;
+  @override
+  List<UserFileModel> get userFile {
+    if (_userFile is EqualUnmodifiableListView) return _userFile;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_userFile);
+  }
+
+  @override
+  @JsonKey()
+  final LoadingState loadingState;
   @override
   @JsonKey()
   final bool isGrid;
 
   @override
   String toString() {
-    return 'DashboardState(entity: $entity, isGrid: $isGrid)';
+    return 'DashboardState(entity: $entity, userFile: $userFile, loadingState: $loadingState, isGrid: $isGrid)';
   }
 
   @override
@@ -135,11 +181,15 @@ class _$$DashboardStateImpl implements $DashboardState {
         (other.runtimeType == runtimeType &&
             other is _$$DashboardStateImpl &&
             (identical(other.entity, entity) || other.entity == entity) &&
+            const DeepCollectionEquality().equals(other._userFile, _userFile) &&
+            (identical(other.loadingState, loadingState) ||
+                other.loadingState == loadingState) &&
             (identical(other.isGrid, isGrid) || other.isGrid == isGrid));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, entity, isGrid);
+  int get hashCode => Object.hash(runtimeType, entity,
+      const DeepCollectionEquality().hash(_userFile), loadingState, isGrid);
 
   @JsonKey(ignore: true)
   @override
@@ -152,10 +202,16 @@ class _$$DashboardStateImpl implements $DashboardState {
 abstract class $DashboardState implements DashboardState {
   const factory $DashboardState(
       {required final DashboardEntity entity,
+      required final List<UserFileModel> userFile,
+      final LoadingState loadingState,
       final bool isGrid}) = _$$DashboardStateImpl;
 
   @override
   DashboardEntity get entity;
+  @override
+  List<UserFileModel> get userFile;
+  @override
+  LoadingState get loadingState;
   @override
   bool get isGrid;
   @override
